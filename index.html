@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Dr. Pritam Mandal — Metallurgical & Materials Engineer.">
+<style>
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; } img { max-width: 100%; } [hidden] { display: none !important; }
+</style>
+<title>Dr. Pritam Mandal</title>
+<style>
+  /* Layout: fixed nav + bold full-bleed hero, then centered single-column content sections with an accent rail */
+  :root {
+    --bg: #f4f5f7;
+    --surface: #ffffff;
+    --ink: #14171c;
+    --muted: #5a6270;
+    --line: #dfe2e8;
+    --accent: #d64518;      /* molten metal orange */
+    --accent-2: #1f6f8b;    /* oxide teal */
+    --hero-bg: #0e1116;
+    --hero-ink: #f4f5f7;
+    --hero-muted: #9aa4b2;
+    --hero-line: #2a2f39;
+    --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0e1116;
+      --surface: #161a21;
+      --ink: #eef1f5;
+      --muted: #9aa4b2;
+      --line: #262c36;
+      --accent: #f26430;
+      --accent-2: #46a5c4;
+      --hero-bg: #080a0e;
+      --hero-line: #232833;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e1116;
+    --surface: #161a21;
+    --ink: #eef1f5;
+    --muted: #9aa4b2;
+    --line: #262c36;
+    --accent: #f26430;
+    --accent-2: #46a5c4;
+    --hero-bg: #080a0e;
+    --hero-line: #232833;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent-2); }
+  h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+
+  /* NAV */
+  .nav {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px clamp(16px, 5vw, 56px);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__brand { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; font-size: 1rem; }
+  .nav__links { display: flex; gap: clamp(10px, 2vw, 26px); flex-wrap: wrap; }
+  .nav__links a {
+    color: var(--muted); text-decoration: none; font-size: 0.86rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .nav__links a:hover { color: var(--accent); }
+  .theme-btn {
+    border: 1px solid var(--line); background: transparent; color: var(--muted);
+    border-radius: 999px; padding: 6px 12px; font-size: 0.78rem; cursor: pointer; font-family: var(--font-body);
+  }
+  .theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    background: var(--hero-bg);
+    color: var(--hero-ink);
+    padding: clamp(56px, 12vw, 130px) clamp(16px, 5vw, 56px) clamp(48px, 9vw, 96px);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero__grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(var(--hero-line) 1px, transparent 1px), linear-gradient(90deg, var(--hero-line) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: radial-gradient(ellipse 80% 70% at 70% 20%, #000 20%, transparent 75%);
+    opacity: 0.5;
+  }
+  .hero__inner {
+    position: relative; max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.4fr 0.9fr; gap: clamp(24px, 5vw, 56px); align-items: center;
+  }
+  .hero__photo {
+    position: relative; justify-self: center; width: min(330px, 80vw); aspect-ratio: 3/4;
+  }
+  .hero__photo img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    -webkit-mask-image: radial-gradient(ellipse 82% 92% at 50% 42%, #000 46%, rgba(0,0,0,0) 100%);
+            mask-image: radial-gradient(ellipse 82% 92% at 50% 42%, #000 46%, rgba(0,0,0,0) 100%);
+  }
+  .hero__photo::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 58% 68% at 50% 44%, transparent 52%, var(--hero-bg) 100%),
+      linear-gradient(180deg, transparent 50%, var(--hero-bg) 95%),
+      linear-gradient(200deg, transparent 62%, rgba(214,69,24,0.18));
+  }
+  @media (max-width: 720px) {
+    .hero__inner { grid-template-columns: 1fr; }
+    .hero__photo { order: -1; margin-bottom: 8px; }
+  }
+  .hero__eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--accent); font-size: 0.8rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 20px;
+  }
+  .hero__eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--accent); }
+  .hero h1 {
+    font-size: clamp(2.6rem, 8vw, 5rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02;
+  }
+  .hero h1 .thin { color: var(--hero-muted); font-weight: 500; }
+  .hero__role {
+    margin-top: 22px; font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(1.05rem, 2.6vw, 1.5rem); color: var(--hero-ink);
+  }
+  .hero__blurb { margin-top: 18px; max-width: 60ch; color: var(--hero-muted); font-size: 1.05rem; }
+  .hero__meta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px 26px; color: var(--hero-muted); font-size: 0.92rem; }
+  .hero__meta strong { color: var(--hero-ink); font-weight: 600; }
+  .hero__cta { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 20px; border-radius: 999px; text-decoration: none;
+    font-weight: 600; font-size: 0.92rem; font-family: var(--font-display);
+  }
+  .btn--solid { background: var(--accent); color: #fff; }
+  .btn--solid:hover { filter: brightness(1.08); }
+  .btn--ghost { border: 1px solid var(--hero-line); color: var(--hero-ink); }
+  .btn--ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* MAIN */
+  main { max-width: 960px; margin: 0 auto; padding: clamp(40px, 8vw, 80px) clamp(16px, 5vw, 56px) 40px; }
+  section { padding-block: clamp(30px, 6vw, 54px); border-top: 1px solid var(--line); }
+  section:first-of-type { border-top: none; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 28px; }
+  .sec-head__num { font-family: var(--font-display); color: var(--accent); font-weight: 700; font-size: 0.9rem; }
+  .sec-head h2 { font-size: clamp(1.5rem, 4vw, 2.1rem); letter-spacing: -0.02em; }
+
+  .lead { font-size: 1.12rem; color: var(--ink); max-width: 62ch; }
+
+  /* chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+  .chip {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px 13px; font-size: 0.9rem; font-weight: 500;
+  }
+  .chip span { color: var(--accent-2); font-weight: 600; }
+
+  /* skill grid */
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .card h3 { font-size: 1rem; margin-bottom: 6px; }
+  .card p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+
+  /* timeline */
+  .timeline { display: flex; flex-direction: column; gap: 4px; }
+  .item {
+    position: relative; padding: 18px 0 18px 26px; border-left: 2px solid var(--line);
+  }
+  .item::before {
+    content: ""; position: absolute; left: -7px; top: 24px; width: 12px; height: 12px;
+    border-radius: 50%; background: var(--accent); border: 3px solid var(--bg);
+  }
+  .item__top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; align-items: baseline; }
+  .item h3 { font-size: 1.12rem; }
+  .item__org { color: var(--accent-2); font-weight: 600; font-size: 0.95rem; }
+  .item__date { color: var(--muted); font-size: 0.85rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .item__proj { font-style: italic; color: var(--muted); margin: 6px 0 8px; font-size: 0.95rem; }
+  .item ul { margin: 6px 0 0; padding-left: 18px; color: var(--ink); }
+  .item li { margin-bottom: 5px; }
+
+  /* education */
+  .edu { display: flex; flex-direction: column; gap: 14px; }
+  .edu__row {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px;
+    border-left: 4px solid var(--accent);
+  }
+  .edu__deg { font-family: var(--font-display); font-weight: 600; }
+  .edu__inst { color: var(--muted); font-size: 0.92rem; margin-top: 2px; }
+  .edu__date { color: var(--muted); font-size: 0.85rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* publications */
+  .pub-head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-bottom: 22px; }
+  .pub-count {
+    font-family: var(--font-display); font-weight: 700; font-size: 1.05rem;
+    background: var(--accent); color: #fff; border-radius: 8px; padding: 4px 12px;
+  }
+  .pub-head a { font-size: 0.9rem; font-weight: 600; text-decoration: none; }
+  .pub-head a:hover { text-decoration: underline; }
+  .pub { padding: 16px 0; border-top: 1px solid var(--line); }
+  .pub:first-of-type { border-top: none; }
+  .pub__title { font-weight: 500; }
+  .pub__title a { text-decoration: none; }
+  .pub__title a:hover { text-decoration: underline; }
+  .pub__meta { color: var(--muted); font-size: 0.88rem; margin-top: 4px; }
+  .pub__meta em { color: var(--accent-2); font-style: normal; font-weight: 600; }
+
+  /* referees */
+  .ref-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
+  .ref { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+  .ref h3 { font-size: 1rem; }
+  .ref__role { color: var(--muted); font-size: 0.88rem; margin: 4px 0 10px; }
+  .ref__contact { font-size: 0.85rem; color: var(--muted); word-break: break-word; }
+
+  /* contact */
+  .contact-card {
+    background: var(--hero-bg); color: var(--hero-ink); border-radius: 16px;
+    padding: clamp(28px, 6vw, 48px); text-align: center;
+  }
+  .contact-card h2 { font-size: clamp(1.6rem, 5vw, 2.4rem); color: var(--hero-ink); }
+  .contact-card p { color: var(--hero-muted); margin: 12px auto 24px; max-width: 46ch; }
+  .contact-lines { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+  .contact-line {
+    display: inline-flex; align-items: center; gap: 10px; font-size: 0.98rem;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--hero-line);
+    padding: 9px 16px; border-radius: 999px;
+  }
+  .contact-line .lbl { color: var(--accent); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .contact-line .val { color: var(--hero-ink); user-select: all; }
+  .contact-line a { color: var(--hero-ink); text-decoration: none; }
+  .contact-line a:hover { color: var(--accent); }
+  .contact-links { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+
+  footer { text-align: center; color: var(--muted); font-size: 0.82rem; padding: 30px 16px 10px; }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  /* scroll progress bar */
+  .progress {
+    position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    z-index: 40; transition: width .1s linear;
+  }
+
+  /* hero canvas — animated atomic lattice */
+  .hero__canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+  .hero__inner { z-index: 1; }
+  .hero__grid { z-index: 0; }
+
+  /* animated accent shimmer on the thin surname */
+  .hero h1 .thin {
+    background: linear-gradient(100deg, var(--hero-muted) 30%, var(--accent) 50%, var(--hero-muted) 70%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+  @keyframes shimmer { to { background-position: -220% 0; } }
+
+  /* photo soft glow + hover */
+  .hero__photo { transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+  .hero__photo::before {
+    content: ""; position: absolute; inset: -14% -10% -6%; z-index: -1;
+    background: radial-gradient(ellipse 55% 55% at 50% 45%, color-mix(in srgb, var(--accent) 30%, transparent), transparent 70%);
+    filter: blur(26px); opacity: .5; animation: pulse 7s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:.38} 50%{opacity:.66} }
+  .hero__photo:hover { transform: translateY(-5px); }
+
+  /* reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* card / chip micro-interactions */
+  .card { transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+  .card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 14px 30px rgba(0,0,0,.08); }
+  .chip { transition: transform .2s ease, border-color .2s ease, color .2s ease; }
+  .chip:hover { transform: translateY(-2px); border-color: var(--accent-2); }
+  .edu__row { transition: transform .25s ease, box-shadow .25s ease; }
+  .edu__row:hover { transform: translateX(4px); box-shadow: 0 10px 24px rgba(0,0,0,.07); }
+  .pub { transition: padding-left .25s ease, background .25s ease; border-radius: 8px; }
+  .pub:hover { padding-left: 12px; background: color-mix(in srgb, var(--accent) 6%, transparent); }
+  .ref { transition: transform .25s ease, border-color .25s ease; }
+  .ref:hover { transform: translateY(-4px); border-color: var(--accent); }
+
+  /* animated section number + heading underline draw */
+  .sec-head__num { position: relative; }
+  .sec-head h2 { position: relative; display: inline-block; }
+  .sec-head h2::after {
+    content: ""; position: absolute; left: 0; bottom: -6px; height: 3px; width: 0;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 3px;
+    transition: width .7s cubic-bezier(.2,.7,.2,1);
+  }
+  section.in .sec-head h2::after { width: 100%; }
+
+  /* hero entrance (runs on load) */
+  .hero__text > * { opacity: 0; transform: translateY(22px); animation: riseIn .8s cubic-bezier(.2,.7,.2,1) forwards; }
+  .hero__text > *:nth-child(1) { animation-delay: .05s; }
+  .hero__text > *:nth-child(2) { animation-delay: .16s; }
+  .hero__text > *:nth-child(3) { animation-delay: .27s; }
+  .hero__text > *:nth-child(4) { animation-delay: .38s; }
+  .hero__text > *:nth-child(5) { animation-delay: .49s; }
+  .hero__text > *:nth-child(6) { animation-delay: .60s; }
+  .hero__photo { opacity: 0; animation: popIn 1s cubic-bezier(.2,.7,.2,1) .35s forwards; }
+  @keyframes riseIn { to { opacity: 1; transform: none; } }
+  @keyframes popIn { from { opacity: 0; transform: scale(.94) translateY(18px); } to { opacity: 1; transform: none; } }
+
+  /* stats band */
+  .stats {
+    background: var(--hero-bg); color: var(--hero-ink); position: relative; overflow: hidden;
+    padding: clamp(28px, 6vw, 46px) clamp(16px, 5vw, 56px);
+    border-top: 1px solid var(--hero-line); border-bottom: 1px solid var(--hero-line);
+  }
+  .stats__inner {
+    max-width: 1000px; margin: 0 auto; position: relative; z-index: 1;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 4vw, 40px); text-align: center;
+  }
+  .stat__num {
+    font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em;
+    font-size: clamp(2rem, 6vw, 3.2rem); line-height: 1;
+    background: linear-gradient(120deg, var(--hero-ink), var(--accent));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    font-variant-numeric: tabular-nums;
+  }
+  .stat__label { margin-top: 8px; color: var(--hero-muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  @media (max-width: 620px) { .stats__inner { grid-template-columns: repeat(2, 1fr); gap: 24px 16px; } }
+
+  /* floating gradient orbs behind main */
+  main { position: relative; }
+  .orb { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .16; z-index: 0; pointer-events: none; }
+  .orb--1 { width: 340px; height: 340px; background: var(--accent); top: 6%; right: -120px; animation: float1 18s ease-in-out infinite; }
+  .orb--2 { width: 300px; height: 300px; background: var(--accent-2); top: 52%; left: -130px; animation: float2 22s ease-in-out infinite; }
+  main > * { position: relative; z-index: 1; }
+  @keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,50px)} }
+  @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-40px)} }
+
+  /* button shine on hover */
+  .btn { position: relative; overflow: hidden; }
+  .btn::after {
+    content: ""; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent);
+    transform: skewX(-18deg); transition: left .6s ease;
+  }
+  .btn:hover::after { left: 140%; }
+
+  /* nav scroll-spy active state */
+  .nav__links a.active { color: var(--accent); }
+
+  /* research showcase gallery — figures merge into a panel tinted to their own background */
+  .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 3vw, 26px); }
+  .fig { min-width: 0; }
+  .fig--wide { grid-column: 1 / -1; }
+  .fig__media {
+    border-radius: 16px; overflow: hidden; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.10);
+  }
+  .fig__media img {
+    width: 100%; height: auto; display: block; transition: transform .6s cubic-bezier(.2,.7,.2,1);
+    -webkit-mask-image: radial-gradient(ellipse 96% 94% at 50% 50%, #000 58%, rgba(0,0,0,0) 100%);
+            mask-image: radial-gradient(ellipse 96% 94% at 50% 50%, #000 58%, rgba(0,0,0,0) 100%);
+  }
+  .fig:hover .fig__media img { transform: scale(1.035); }
+  .fig__cap { margin-top: 12px; font-size: 0.9rem; color: var(--muted); line-height: 1.5; max-width: 62ch; }
+  .fig__cap b { color: var(--ink); font-weight: 600; }
+  @media (max-width: 620px) { .gallery { grid-template-columns: 1fr; } }
+
+  /* alternating publication slide-in */
+  .pub { transform: translateX(-24px); }
+  .pub.in { transform: none; }
+  .pub:nth-child(even) { transform: translateX(24px); }
+  .pub:nth-child(even).in { transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__text > *, .hero__photo { opacity: 1 !important; transform: none !important; animation: none !important; }
+    .orb { animation: none; }
+    .sec-head h2::after { transition: none; width: 100%; }
+    .pub { transform: none !important; }
+    .btn::after { display: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .hero h1 .thin, .hero__photo::before { animation: none; }
+    .hero h1 .thin { -webkit-text-fill-color: currentColor; background: none; color: var(--hero-muted); }
+    * { scroll-behavior: auto !important; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    a, .btn, .theme-btn { transition: color .15s, border-color .15s, filter .15s; }
+  }
+</style>
+
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap">
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<nav class="nav">
+  <div class="nav__brand">Dr. Pritam Mandal</div>
+  <div class="nav__links">
+    <a href="#about">About</a>
+    <a href="#research">Research</a>
+    <a href="#experience">Experience</a>
+    <a href="#publications">Publications</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="theme-btn" id="themeBtn" aria-label="Toggle color theme">Theme</button>
+</nav>
+
+<header class="hero">
+  <canvas class="hero__canvas" id="lattice" aria-hidden="true"></canvas>
+  <div class="hero__grid" aria-hidden="true"></div>
+  <div class="hero__inner">
+   <div class="hero__text">
+    <span class="hero__eyebrow">Metallurgical &amp; Materials Engineer</span>
+    <h1>Dr. Pritam<br><span class="thin">Mandal</span></h1>
+    <div class="hero__role">Research Associate · University of Hyderabad</div>
+    <p class="hero__blurb">Advanced materials design and surface engineering for aerospace and high-temperature applications — high-entropy alloys, Ni-based superalloys, thermal barrier coatings, and machine-learning–driven microstructure prediction.</p>
+    <div class="hero__meta">
+      <span><strong>Ph.D.</strong> Metallurgy &amp; Materials Engineering, IIEST Shibpur</span>
+      <span><strong>NDT</strong> Level-II (VT, UT, RT, DPT)</span>
+      <span><strong>7</strong> Publications</span>
+    </div>
+    <div class="hero__cta">
+      <a class="btn btn--solid" href="#publications">View Publications</a>
+      <a class="btn btn--ghost" href="#contact">Get in Touch</a>
+      <a class="btn btn--ghost" href="Dr_Pritam_Mandal_CV.pdf" download>Download CV ↓</a>
+    </div>
+   </div>
+   <div class="hero__photo">
+     <img src="photo.jpg" alt="Portrait of Dr. Pritam Mandal" width="620" height="826">
+   </div>
+  </div>
+</header>
+
+<section class="stats" id="stats" aria-label="Key facts">
+  <div class="stats__inner">
+    <div class="stat"><div class="stat__num" data-count="7" data-suffix="">0</div><div class="stat__label">Publications</div></div>
+    <div class="stat"><div class="stat__num" data-count="6" data-suffix="+">0</div><div class="stat__label">Years in R&amp;D</div></div>
+    <div class="stat"><div class="stat__num" data-count="4" data-suffix="">0</div><div class="stat__label">NDT Qualifications</div></div>
+    <div class="stat"><div class="stat__num" data-count="7" data-suffix="">0</div><div class="stat__label">Research Areas</div></div>
+  </div>
+</section>
+
+<main>
+  <div class="orb orb--1" aria-hidden="true"></div>
+  <div class="orb orb--2" aria-hidden="true"></div>
+  <section id="about">
+    <div class="sec-head"><span class="sec-head__num">01</span><h2>About</h2></div>
+    <p class="lead">I work at the intersection of experimental metallurgy and data-driven modelling. My research couples microstructure–property correlation through advanced characterization with machine-learning approaches to predict phases, crystal structures, and mechanical behaviour of complex alloy systems. Alongside the lab, I design and validate research-grade computational materials science problems for training and evaluating frontier large language models.</p>
+    <div class="chips" style="margin-top:22px">
+      <div class="chip"><span>Objective:</span> R&amp;D roles in Metallurgical &amp; Materials Engineering</div>
+      <div class="chip"><span>Based in</span> Kolkata, India</div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head"><span class="sec-head__num">02</span><h2>Core Skills</h2></div>
+    <div class="grid2">
+      <div class="card"><h3>Data-Based Modelling</h3><p>Machine learning in Python for materials property and phase prediction.</p></div>
+      <div class="card"><h3>LLM Training (STEM)</h3><p>Research-quality problem design and scientific reasoning evaluation.</p></div>
+      <div class="card"><h3>CALPHAD</h3><p>Computational thermodynamics and phase-diagram modelling.</p></div>
+      <div class="card"><h3>Material Characterization</h3><p>SEM, EDS, XRD, TEM, DSC/TGA, mechanical, electrochemical &amp; thermal.</p></div>
+      <div class="card"><h3>NDT Level II</h3><p>Certified in VT, UT, RT and DPT inspection methods.</p></div>
+      <div class="card"><h3>Surface Protection &amp; Coatings</h3><p>Advanced coating technologies and thermal barrier systems.</p></div>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="sec-head"><span class="sec-head__num">03</span><h2>Research Areas</h2></div>
+    <div class="chips">
+      <div class="chip">Thermal Barrier Coatings</div>
+      <div class="chip">High-Entropy Alloys &amp; Oxides</div>
+      <div class="chip">Ni-Based Superalloys</div>
+      <div class="chip">Aeroengine Materials</div>
+      <div class="chip">Advanced Engineering Materials</div>
+      <div class="chip">Data-Based Process Modelling</div>
+      <div class="chip">Iron-Making &amp; Computational Metallurgy</div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head"><span class="sec-head__num">04</span><h2>Experience</h2></div>
+    <div class="timeline">
+      <div class="item">
+        <div class="item__top">
+          <h3>Research Associate (RA)</h3>
+          <span class="item__date">Apr 2026 – Present</span>
+        </div>
+        <div class="item__org">SEST · University of Hyderabad</div>
+        <p class="item__proj">NMDC-sponsored: "Utilization of BHQ Baladilla Region for the Production of Ferrosilicon"</p>
+        <ul>
+          <li>Designing experiments on phase transformations and metallurgical processing relevant to ferrosilicon production.</li>
+          <li>Performing microstructural characterization and data-driven analysis in Python to generate process insights.</li>
+          <li>Contributing to multi-disciplinary R&amp;D discussions; supporting lab management, resource planning and safety compliance.</li>
+        </ul>
+      </div>
+      <div class="item">
+        <div class="item__top">
+          <h3>Research Quality Specialist — Materials Science</h3>
+          <span class="item__date">Dec 2025 – Apr 2026</span>
+        </div>
+        <div class="item__org">Turing · Remote (Contract)</div>
+        <ul>
+          <li>Developed and validated research-grade computational materials science problems for AI model training and evaluation.</li>
+          <li>Designed Python-based scientific solutions and assessed technical accuracy, logical reasoning and solution quality.</li>
+          <li>Reviewed AI-generated responses and collaborated with global experts to improve high-quality STEM datasets for frontier LLMs.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="sec-head"><span class="sec-head__num">05</span><h2>Education</h2></div>
+    <div class="edu">
+      <div class="edu__row">
+        <div>
+          <div class="edu__deg">Ph.D. in Metallurgy &amp; Materials Engineering</div>
+          <div class="edu__inst">Indian Institute of Engineering Science and Technology (IIEST), Shibpur</div>
+        </div>
+        <span class="edu__date">Completed 19 Aug 2026</span>
+      </div>
+      <div class="edu__row">
+        <div>
+          <div class="edu__deg">M.Tech. in Materials Engineering</div>
+          <div class="edu__inst">IIEST, Shibpur</div>
+        </div>
+        <span class="edu__date">Jul 2020</span>
+      </div>
+      <div class="edu__row">
+        <div>
+          <div class="edu__deg">B.Tech. in Mechanical Engineering</div>
+          <div class="edu__inst">Maulana Abul Kalam Azad University of Technology (formerly WBUT)</div>
+        </div>
+        <span class="edu__date">Jul 2017</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="sec-head"><span class="sec-head__num">06</span><h2>Publications</h2></div>
+    <div class="pub-head">
+      <span class="pub-count">7 papers</span>
+      <a href="https://scholar.google.com/citations?hl=en&user=g0f7HBMAAAAJ" target="_blank" rel="noopener">Google Scholar ↗</a>
+      <a href="https://orcid.org/0000-0003-1924-5027" target="_blank" rel="noopener">ORCID ↗</a>
+    </div>
+
+    <div class="pub">
+      <div class="pub__title"><a href="https://doi.org/10.1007/s12540-022-01220-w" target="_blank" rel="noopener">Phase Prediction in High Entropy Alloys by Various Machine Learning Modules Using Thermodynamic and Configurational Parameters</a></div>
+      <div class="pub__meta">Mandal, P., Choudhury, A., Mallick, A.B., Ghosh, M. · <em>Met. Mater. Int.</em> 29, 38–52 (2023)</div>
+    </div>
+    <div class="pub">
+      <div class="pub__title"><a href="https://doi.org/10.1016/j.jalmes.2024.100087" target="_blank" rel="noopener">A voting-based ensemble classifier to predict phases and crystal structures of high entropy alloys through thermodynamic, electronic, and configurational parameters</a></div>
+      <div class="pub__meta">Mandal, P., Choudhury, A., Mallick, A.B., Ghosh, M. · <em>Journal of Alloys and Metallurgical Systems</em> (2023)</div>
+    </div>
+    <div class="pub">
+      <div class="pub__title"><a href="https://doi.org/10.1007/s44174-025-00314-4" target="_blank" rel="noopener">A Review on High Entropy Alloys as Metallic Biomaterials: Fabrication, Properties, Applications, Challenges, and Future Prospects</a></div>
+      <div class="pub__meta">Adhikari, J., Saha, P., Mandal, P. et al. · <em>Biomedical Materials &amp; Devices</em> (2025)</div>
+    </div>
+    <div class="pub">
+      <div class="pub__title"><a href="https://doi.org/10.1007/s10853-025-10729-5" target="_blank" rel="noopener">Developing new high-entropy alloys with enhanced hardness using a hybrid machine learning approach: integrating interpretability and NSGA-II optimization</a></div>
+      <div class="pub__meta">Dey, D., Pal, A., Biyani, P. et al. · <em>J Mater Sci</em> 60, 4820–4845 (2025)</div>
+    </div>
+    <div class="pub">
+      <div class="pub__title"><a href="https://doi.org/10.1016/j.jalmes.2024.100144" target="_blank" rel="noopener">Improved machine learning framework for prediction of phases and crystal structures of high entropy alloys</a></div>
+      <div class="pub__meta">Dey, D., Das, S., Pal, A., Dey, S., Raul, C.K., Mandal, P. et al. · <em>J. Alloys Metall. Syst.</em> 9 (2025), 100144</div>
+    </div>
+    <div class="pub">
+      <div class="pub__title"><a href="https://doi.org/10.1007/s40033-026-00992-4" target="_blank" rel="noopener">Influence of Alloying Elements and Annealing Temperature on Lankford Constant of High Strength Dual Phase Steels Using Supervised Regression Models</a></div>
+      <div class="pub__meta">Pal, A., Verma, R., Mandal, P. et al. · <em>J. Inst. Eng. India Ser. D</em> (2026)</div>
+    </div>
+    <div class="pub">
+      <div class="pub__title"><a href="https://doi.org/10.1109/ACCESS.2024.3394061" target="_blank" rel="noopener">Utilizing Machine Learning Algorithms to Predict Accuracy of the Index of Relative Tectonic Activity (IRTA), Dhansiri (North) River Basin in India and Bhutan</a></div>
+      <div class="pub__meta">Roy, S. et al. · <em>IEEE Access</em> vol. 12, pp. 60482–60495 (2024)</div>
+    </div>
+  </section>
+
+  <section id="referees">
+    <div class="sec-head"><span class="sec-head__num">07</span><h2>Referees</h2></div>
+    <div class="ref-grid">
+      <div class="ref">
+        <h3>Dr. Manojit Ghosh</h3>
+        <div class="ref__role">Ph.D. Supervisor · Professor, Metallurgy &amp; Materials Engineering, IIEST Shibpur</div>
+        <div class="ref__contact">mghosh.metal@faculty.iiests.ac.in<br>+91 98748 65163</div>
+      </div>
+      <div class="ref">
+        <h3>Dr. Amitava Basu Mallick</h3>
+        <div class="ref__role">Ph.D. Co-Supervisor · Metallurgy &amp; Materials Engineering, IIEST Shibpur</div>
+        <div class="ref__contact">abasumallick.metal@faculty.iiests.ac.in<br>+91 94337 39176</div>
+      </div>
+      <div class="ref">
+        <h3>Dr. Jai Prakash Gautam</h3>
+        <div class="ref__role">Present Supervisor · Professor &amp; Dean, School of Engineering Sciences &amp; Technology, University of Hyderabad</div>
+        <div class="ref__contact">jaiprakashgautam@uohyd.ac.in<br>+91 96210 59857</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-card">
+      <h2>Let's collaborate</h2>
+      <p>Open to research and development opportunities in metallurgical and materials engineering.</p>
+      <div class="contact-lines">
+        <div class="contact-line"><span class="lbl">Email</span><span class="val">pritammandal16.pm@gmail.com</span></div>
+        <div class="contact-line"><span class="lbl">Phone</span><span class="val">+91 86974 52516</span></div>
+        <div class="contact-line"><span class="lbl">Location</span><span class="val">Kolkata, India</span></div>
+      </div>
+      <div class="contact-links">
+        <a class="btn btn--solid" href="https://www.linkedin.com/in/pritam-mandal-6b250a143" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn btn--ghost" href="https://scholar.google.com/citations?hl=en&user=g0f7HBMAAAAJ" target="_blank" rel="noopener">Google Scholar ↗</a>
+        <a class="btn btn--ghost" href="https://orcid.org/0000-0003-1924-5027" target="_blank" rel="noopener">ORCID ↗</a>
+        <a class="btn btn--solid" href="Dr_Pritam_Mandal_CV.pdf" download>Download CV ↓</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© <span id="yr"></span> Dr. Pritam Mandal · Metallurgical &amp; Materials Engineer</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  (function () {
+    var btn = document.getElementById('themeBtn');
+    function current() {
+      var attr = document.documentElement.getAttribute('data-theme');
+      if (attr) return attr;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    btn.addEventListener('click', function () {
+      var next = current() === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('pm-theme', next); } catch (e) {}
+    });
+    try {
+      var saved = localStorage.getItem('pm-theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+    } catch (e) {}
+  })();
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* scroll progress bar */
+  (function () {
+    var bar = document.getElementById('progress');
+    function upd() {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', upd, { passive: true });
+    window.addEventListener('resize', upd);
+    upd();
+  })();
+
+  /* reveal on scroll */
+  (function () {
+    var els = document.querySelectorAll('section, .card, .item, .edu__row, .pub, .ref');
+    els.forEach(function (el) { el.classList.add('reveal'); });
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e, i) {
+        if (e.isIntersecting) {
+          var el = e.target;
+          el.style.transitionDelay = Math.min(i * 40, 160) + 'ms';
+          el.classList.add('in');
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
+  /* count-up stats */
+  (function () {
+    var nums = document.querySelectorAll('.stat__num');
+    function run(el) {
+      var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+      var suffix = el.getAttribute('data-suffix') || '';
+      if (reduceMotion) { el.textContent = target + suffix; return; }
+      var start = null, dur = 1100;
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(eased * target) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    if (!('IntersectionObserver' in window)) { nums.forEach(run); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    nums.forEach(function (n) { io.observe(n); });
+  })();
+
+  /* scroll-spy nav highlight */
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav__links a'));
+    var map = {};
+    links.forEach(function (l) {
+      var id = l.getAttribute('href').slice(1);
+      var sec = document.getElementById(id);
+      if (sec) map[id] = l;
+    });
+    var ids = Object.keys(map);
+    if (!ids.length || !('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) {
+          links.forEach(function (l) { l.classList.remove('active'); });
+          if (map[e.target.id]) map[e.target.id].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    ids.forEach(function (id) { io.observe(document.getElementById(id)); });
+  })();
+
+  /* hero atomic lattice */
+  (function () {
+    var canvas = document.getElementById('lattice');
+    if (!canvas || reduceMotion) return;
+    var ctx = canvas.getContext('2d');
+    var W, H, dpr, nodes = [], raf;
+    var LINK = 132;
+    function accent() {
+      return getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#d64518';
+    }
+    function hexToRgb(h) {
+      h = h.replace('#',''); if (h.length===3) h = h.split('').map(function(c){return c+c;}).join('');
+      var n = parseInt(h,16); return [(n>>16)&255,(n>>8)&255,n&255];
+    }
+    function resize() {
+      var r = canvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = r.width; H = r.height;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var target = Math.round(Math.min(64, (W * H) / 14000));
+      nodes = [];
+      for (var i = 0; i < target; i++) {
+        nodes.push({ x: Math.random()*W, y: Math.random()*H,
+          vx: (Math.random()-.5)*0.28, vy: (Math.random()-.5)*0.28 });
+      }
+    }
+    function frame() {
+      var rgb = hexToRgb(accent());
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < nodes.length; i++) {
+        var a = nodes[i];
+        a.x += a.vx; a.y += a.vy;
+        if (a.x < 0 || a.x > W) a.vx *= -1;
+        if (a.y < 0 || a.y > H) a.vy *= -1;
+        for (var j = i + 1; j < nodes.length; j++) {
+          var b = nodes[j], dx = a.x-b.x, dy = a.y-b.y, d = Math.sqrt(dx*dx+dy*dy);
+          if (d < LINK) {
+            var o = (1 - d / LINK) * 0.5;
+            ctx.strokeStyle = 'rgba('+rgb[0]+','+rgb[1]+','+rgb[2]+','+o+')';
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+      }
+      for (var k = 0; k < nodes.length; k++) {
+        var p = nodes[k];
+        ctx.fillStyle = 'rgba('+rgb[0]+','+rgb[1]+','+rgb[2]+',0.85)';
+        ctx.beginPath(); ctx.arc(p.x, p.y, 1.7, 0, Math.PI*2); ctx.fill();
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    resize();
+    window.addEventListener('resize', function () { resize(); });
+    frame();
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { cancelAnimationFrame(raf); }
+      else { cancelAnimationFrame(raf); frame(); }
+    });
+  })();
+</script>
+
+</body>
+</html>
