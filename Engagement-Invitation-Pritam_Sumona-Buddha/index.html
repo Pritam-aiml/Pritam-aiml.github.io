@@ -352,24 +352,26 @@
     width:clamp(210px,55vw,330px);max-width:100%;
     aspect-ratio:760/193;
     background-color:var(--ink);
-    background-image:linear-gradient(104deg,
-      rgba(255,255,255,0) 40%,
-      rgba(214,170,90,.55) 46%,
-      #E3BD79 50%,
-      rgba(214,170,90,.55) 54%,
-      rgba(255,255,255,0) 60%);
+    background-image:linear-gradient(100deg,
+      rgba(227,189,121,0) 45.5%,
+      rgba(214,164,70,.42) 47.6%,
+      rgba(243,214,142,.96) 49.3%,
+      #FFF6DC 50%,
+      rgba(243,214,142,.96) 50.7%,
+      rgba(214,164,70,.42) 52.4%,
+      rgba(227,189,121,0) 54.5%);
     background-repeat:no-repeat;
-    background-size:240% 100%;
-    background-position:112% 0;
+    background-size:300% 100%;
+    background-position:88% 0;
     -webkit-mask:var(--calli) center/contain no-repeat;
             mask:var(--calli) center/contain no-repeat;
-    animation:calli-sheen 4.6s cubic-bezier(.4,0,.5,1) infinite;
+    animation:calli-sheen 9.5s cubic-bezier(.42,.02,.58,.98) infinite;
   }
   /* position runs high->low so the highlight travels left to right */
   @keyframes calli-sheen{
-     0%   {background-position:112% 0}
-    44%  {background-position:-12% 0}
-    100% {background-position:-12% 0}
+     0%   {background-position:88% 0}
+    58%  {background-position:12% 0}
+    100% {background-position:12% 0}
   }
   @media (prefers-reduced-motion:reduce){
     .bless .calli{animation:none;background-image:none}
