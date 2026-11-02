@@ -3,6 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'unsafe-inline'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+
 <meta name="description" content="Thursday, 26 November 2026 · Harry Garden, Harinavi, Rajpur Sonarpur. Together with our families, please join us.">
 <link rel="canonical" href="https://pritam-aiml.github.io/Engagement-Invitation-Pritam_Sumona/">
 
@@ -318,13 +323,14 @@
   .num{margin:0;font-variant-numeric:tabular-nums;font-size:clamp(1.15rem,4vw,1.35rem);letter-spacing:.06em}
   .num a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--gilt-pale)}
   .num a:hover{border-bottom-color:var(--ink)}
-  .copy{
+  .hidden-num{color:var(--ink-soft);font-style:italic;font-size:.82em;letter-spacing:0}
+  .copy,.reveal{
     font-family:var(--font-label);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;
     color:var(--ink-soft);background:none;border:1px solid var(--gilt-pale);
     padding:.6em 1em;cursor:pointer;transition:border-color .2s,color .2s;
   }
-  .copy:hover{border-color:var(--ink);color:var(--ink)}
-  .copy:focus-visible{outline:2px solid var(--gilt);outline-offset:3px}
+  .copy:hover,.reveal:hover{border-color:var(--ink);color:var(--ink)}
+  .copy:focus-visible,.reveal:focus-visible{outline:2px solid var(--gilt);outline-offset:3px}
   .contact-outro{margin:1.7em auto 0;font-style:italic;color:var(--ink-soft)}
 
   /* ── Momo ────────────────────────────────────── */
@@ -504,15 +510,15 @@
     <p class="label">If you need us on the day</p>
     <p class="contact-intro">Call either of us if the venue is hard to find — we will come and get you.</p>
     <div class="cards">
-      <div class="person">
+      <div class="person" data-p="Nzk4MDE3NzQyMA==">
         <p class="who">Sumona</p>
-        <p class="num"><a href="tel:+917980177420">79801 77420</a></p>
-        <button type="button" class="copy" data-num="7980177420">Copy number</button>
+        <p class="num"><span class="hidden-num">Tap to show number</span></p>
+        <button type="button" class="reveal">Show number</button>
       </div>
-      <div class="person">
+      <div class="person" data-p="ODY5NzQ1MjUxNg==">
         <p class="who">Pritam</p>
-        <p class="num"><a href="tel:+918697452516">86974 52516</a></p>
-        <button type="button" class="copy" data-num="8697452516">Copy number</button>
+        <p class="num"><span class="hidden-num">Tap to show number</span></p>
+        <button type="button" class="reveal">Show number</button>
       </div>
     </div>
     <p class="contact-outro">We look forward to welcoming you.</p>
@@ -552,25 +558,41 @@
     }
     if (tick()) setInterval(tick, 1000);
 
-    document.querySelectorAll('.copy').forEach(function (btn) {
+    // Numbers are assembled at tap time, so a page scraper reading the
+    // static HTML never sees them.
+    document.querySelectorAll('.person').forEach(function (card) {
+      var btn = card.querySelector('.reveal');
+      var slot = card.querySelector('.hidden-num');
+      if (!btn || !slot) return;
       btn.addEventListener('click', function () {
-        var num = btn.getAttribute('data-num');
-        var done = function () {
-          btn.textContent = 'Copied';
-          setTimeout(function () { btn.textContent = 'Copy number'; }, 2000);
+        var raw;
+        try { raw = atob(card.getAttribute('data-p') || ''); } catch (e) { return; }
+        if (!raw) return;
+        var pretty = raw.slice(0, 5) + ' ' + raw.slice(5);
+        var a = document.createElement('a');
+        a.href = 'tel:+91' + raw;
+        a.textContent = pretty;
+        slot.textContent = '';
+        slot.className = '';
+        slot.appendChild(a);
+        btn.textContent = 'Copy number';
+        btn.className = 'copy';
+        btn.onclick = function () {
+          var done = function () {
+            btn.textContent = 'Copied';
+            setTimeout(function () { btn.textContent = 'Copy number'; }, 2000);
+          };
+          var fallback = function () {
+            var r = document.createRange(); r.selectNodeContents(slot);
+            var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+            btn.textContent = 'Select and copy';
+            setTimeout(function () { btn.textContent = 'Copy number'; }, 2500);
+          };
+          try { navigator.clipboard.writeText(raw).then(done, fallback); }
+          catch (e) { fallback(); }
         };
-        try {
-          navigator.clipboard.writeText(num).then(done, function () { select(btn); });
-        } catch (e) { select(btn); }
       });
     });
-    function select(btn) {
-      var a = btn.parentNode.querySelector('.num');
-      var r = document.createRange(); r.selectNodeContents(a);
-      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      btn.textContent = 'Select and copy';
-      setTimeout(function () { btn.textContent = 'Copy number'; }, 2500);
-    }
   })();
 </script>
 

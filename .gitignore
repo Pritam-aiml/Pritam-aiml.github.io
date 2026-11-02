@@ -1,0 +1,16 @@
+# Never commit credentials to a public repo
+.env
+.env.*
+*.key
+*.pem
+*.p12
+secrets.*
+credentials.*
+service-account*.json
+.netrc
+
+# Local noise
+.DS_Store
+Thumbs.db
+node_modules/
+__pycache__/
